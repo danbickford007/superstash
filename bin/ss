@@ -6,6 +6,8 @@ include Superstash
 case ARGV[0]
 when 'list'
   list
+when 'select'
+  select
 else
   hello 
   add_message

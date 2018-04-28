@@ -20,7 +20,7 @@ module Superstash
 
   def add_message
     puts 'Add a message to identify this stash'
-    message = gets
+    message = STDIN.gets
     create_current_stash message
     stash_current_project
   end
@@ -55,6 +55,22 @@ module Superstash
       end
     rescue
       puts "No stashes available. Hint: type `ss` in your project directory to create a superstash"
+    end
+  end
+
+  def select
+    list
+    puts "Which stash do you wish to apply?"
+    to_apply = STDIN.gets.gsub(/\n/, '')
+    location = "#{PATH}/stashes/#{to_apply}/project"
+    project = location + "/" + Dir.entries(location).reject{|x| ['.', '..'].include? x}.first
+    puts "PROJECT"
+    puts project
+    if !Dir.exist? project
+      puts "Stash does not exist silly"
+    else
+      FileUtils.rm_rf Dir.pwd + '/.'
+      FileUtils.cp_r project + '/.', Dir.pwd
     end
   end
 end
