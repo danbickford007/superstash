@@ -7,7 +7,7 @@
 /pkg/
 /spec/reports/
 /tmp/
-/lib/stashes/
+/lib/stashes/*
 *.swo
 *.swn
 *.swp
