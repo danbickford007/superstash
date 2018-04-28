@@ -1,4 +1,5 @@
 require "superstash/version"
+require 'fileutils'
 
 module Superstash
 
@@ -20,8 +21,29 @@ module Superstash
   def add_message
     puts 'Add a message to identify this stash'
     message = gets
-    list = Dir.entries "#{PATH}/stashes"
-    Dir.mkdir "#{PATH}/stashes/stash-#{list.count}"
-    File.open("#{PATH}/stashes/stash-#{list.count}/message", 'w') { |file| file.write(message) }
+    create_current_stash message
+    stash_current_project
+  end
+
+  def create_current_stash message
+    Dir.mkdir new_stash
+    File.open("#{current_stash}/message", 'w') { |file| file.write(message) }
+  end
+
+  def stash_current_project
+    Dir.mkdir "#{current_stash}/project/" 
+    FileUtils.cp_r Dir.pwd, "#{current_stash}/project/"
+  end
+
+  def new_stash
+    "#{PATH}/stashes/stash-#{stashes.count + 1}"
+  end
+
+  def current_stash
+    "#{PATH}/stashes/stash-#{stashes.count}"
+  end
+
+  def stashes
+    Dir.entries "#{PATH}/stashes"
   end
 end

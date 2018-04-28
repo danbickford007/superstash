@@ -6,4 +6,3 @@ include Superstash
 hello 
 add_message
 
-#FileUtils.copy_entry @source, @destination
