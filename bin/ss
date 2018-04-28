@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
 
-puts 'SuperStashing...'
+require 'superstash'
+include Superstash
+
+hello 
+add_message
 
 #FileUtils.copy_entry @source, @destination
