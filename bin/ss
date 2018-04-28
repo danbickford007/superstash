@@ -3,6 +3,12 @@
 require 'superstash'
 include Superstash
 
-hello 
-add_message
+case ARGV[0]
+when 'list'
+  list
+else
+  hello 
+  add_message
+end
+
 

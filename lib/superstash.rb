@@ -44,6 +44,17 @@ module Superstash
   end
 
   def stashes
-    Dir.entries "#{PATH}/stashes"
+    Dir.entries("#{PATH}/stashes").reject{|x| ['.', '..'].include? x}
+  end
+
+  def list
+    puts 'Current available stashes:'
+    begin
+      stashes.each do |stash|
+        puts stash 
+      end
+    rescue
+      puts "No stashes available. Hint: type `ss` in your project directory to create a superstash"
+    end
   end
 end
